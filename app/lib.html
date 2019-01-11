@@ -13,19 +13,15 @@
             <h2>Keep track of your book collection!</h2>
         </div>
 
-        <div>
-            <input id="book-sort" type="text" id="sort" name="sort" placeholder="Sort books">
-            <label for="sort-by">Sort books by:</label>
-            <select name="sort-by" id="sort-by">
-                <option value="title">Title</option>
-                <option value="author">Author</option>
-                <option value="year">Year</option>
-            </select>
+        <div id="nav">
+            <a href="index.html">Home</a>
         </div>
 
-        <div>
-            <div id="books"></div>
-            <a href="lib.html"><button id="add-book">Add book!</button></a>
+        <div id="main">
+            <input id="book-title" type="text" id="title" name="title" placeholder="Enter book title">
+            <input id="book-author" type="text" id="author" name="author" placeholder="Enter book author">
+            <input id="book-year" type="text" id="year" name="year" placeholder="Enter book year">
+            <button>Remove book</button>
         </div>
         
         <script src="assets/scripts/index.js"></script>
