@@ -8,13 +8,16 @@ const getAddBtn = document.querySelector("#add-book");
 const getRemoveBtn = document.querySelector("#remove-book");
 
 // created books
-const getBook = document.querySelector("#books");
+const selectBook = document.querySelector("#books");
 
 // arr of objects
 let books = [];
 
 // add books arr to local storage
-const storeBooks = () => localStorage.setItem("Book", JSON.stringify(books));
+const storeBooks = () => localStorage.setItem(getBookTitle.value, JSON.stringify(books));
+
+// get book from local storage
+const getBook = () => JSON.parse(localStorage.getItem("book"));
 
 // push book object into books arr when add book btn is clicked
 getAddBtn.addEventListener("click", () => {
@@ -23,7 +26,7 @@ getAddBtn.addEventListener("click", () => {
         author: getBookAuthor.value,
         year: getBookYear.value
     });
+
+    // store array in localStorage
     storeBooks();
 });
-
-console.log(books);
