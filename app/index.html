@@ -13,7 +13,21 @@
             <h2>Keep track of your book collection!</h2>
         </div>
 
-        <div>
+        <div id="book-info" class="container">
+            <label for="title">Book Title:</label>
+            <input id="book-title" id="title" type="text" name="title">
+
+            <label for="author">Book Author:</label>
+            <input id="book-author" id="author" type="text" name="author">
+
+            <label for="year">Book Year:</label>
+            <input id="book-year" id="year" type="number" name="year" min="1700">
+
+            <button id="add-book">Add book</button>
+            <button id="remove-book">Remove book</button>
+        </div>
+
+        <div id="organize" class="container">
             <input id="book-sort" type="text" id="sort" name="sort" placeholder="Sort books">
             <label for="sort-by">Sort books by:</label>
             <select name="sort-by" id="sort-by">
@@ -23,9 +37,8 @@
             </select>
         </div>
 
-        <div>
+        <div id="book-library" class="container">
             <div id="books"></div>
-            <a href="lib.html"><button id="add-book">Add book!</button></a>
         </div>
         
         <script src="assets/scripts/index.js"></script>
