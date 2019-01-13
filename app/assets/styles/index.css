@@ -5,24 +5,22 @@
 }
 
 body {
-    background: rgb(78, 78, 78);
+    background-color: rgb(78, 78, 78);
+    background-image: url("../images/lib1.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     color: #fff;
 }
 
 #heading {
-    background: rgb(6, 111, 160);
-    text-align: center;
-}
-
-.container {
-    margin: 1.0rem;
+    background-color: rgb(0, 119, 255);
 }
 
 #book-info {
-    background: yellow;
-    color: #000;
+    background-color: rgb(81, 0, 255);
 }
 
 #organize {
-    background: red;
+    background-color: rgb(133, 16, 16);
 }

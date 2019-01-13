@@ -16,8 +16,28 @@ let books = [];
 // add books arr to local storage
 const storeBooks = () => localStorage.setItem(getBookTitle.value, JSON.stringify(books));
 
-// get book from local storage
-const getBook = () => JSON.parse(localStorage.getItem("book"));
+// get items from local storage
+const displayBook = () => {
+    let keys = Object.keys(localStorage);
+    keys.forEach((title) => {
+        let p = document.createElement("p");
+        selectBook.appendChild(p);
+        p.textContent = title;
+    });
+}
+
+const resetInputs = () => {
+    getBookTitle.value = "";
+    getBookAuthor.value = "";
+    getBookYear.value = "";
+}
+
+// display library if it already exists
+if (localStorage.length > 0) {
+    displayBook();
+} else {
+    console.log("start your library!")
+}
 
 // push book object into books arr when add book btn is clicked
 getAddBtn.addEventListener("click", () => {
@@ -27,6 +47,12 @@ getAddBtn.addEventListener("click", () => {
         year: getBookYear.value
     });
 
-    // store array in localStorage
+    // store data
     storeBooks();
+
+    // display title
+    displayBook();
+
+    // reset data fields
+    resetInputs();
 });
