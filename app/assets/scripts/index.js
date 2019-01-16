@@ -47,11 +47,20 @@ const displayBooks = (library) => {
 
 // allow user to enter, title, author, year of book
 getAddBtn.addEventListener("click", () => {
-    library.push({
+    const bookData = {
         "title": getBookTitle.value,
         "author": getBookAuthor.value,
         "year": getBookYear.value
-    });
+    };
+
+    // set user data to string and store in localStorage
+    localStorage.setItem(getBookTitle.value, JSON.stringify(bookData));
+
+    // pull user data and push to array
+    for (let i = 0; i < localStorage.length; i++) {
+        library.push(JSON.parse(localStorage.getItem(i)));
+    }
+    
 
     displayBooks(library);
 
@@ -59,7 +68,7 @@ getAddBtn.addEventListener("click", () => {
     resetData();
 });
 
-// after entering data, should display book info on screen and push to localStorage
+console.log(library);
 
 /* PRACTICE OBJECT
 
