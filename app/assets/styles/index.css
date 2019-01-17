@@ -18,9 +18,19 @@ body {
 }
 
 #book-info {
-    background-color: rgb(36, 36, 36);
 }
 
 #organize {
-    background-color: rgb(71, 71, 71);
+}
+
+.container {
+    margin: 1.0rem;
+    color: rgb(251, 255, 2);
+}
+
+table {
+    table-layout: fixed; /* size content according to width of headings */
+    width: 100%; /* expand to fit any container size */
+    border-collapse: collapse; /* collapse to one border */
+    border: 3px solid purple;
 }
