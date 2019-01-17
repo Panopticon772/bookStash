@@ -11,17 +11,30 @@ const getRemoveBtn = document.querySelector("#remove-book");
 const libraryHeader = document.querySelector("#library-header");
 const selectBooks = document.querySelector("#books");
 
-const library = [];
+// check if user already has storage, if so, display books, otherwise print "Add books!"
+// localStorage.length > 0 ? displayBooks(books) : console.log("Add books to get started!");
 
+let books = [];
+
+// store books as JSON string in localStorage
+const bookStorage = () => localStorage.setItem("books", JSON.stringify(books));
+
+// retrieve books from localStorage
+const retrieveBooks = () => JSON.parse(localStorage.getItem("books"));
+
+// reset inputs
 const resetData = () => {
     getBookTitle.value = "";
     getBookAuthor.value = "";
     getBookYear.value = "";
 }
 
-const displayBooks = (library) => {
+// add book render on page refresh
 
-    for (let i = 0; i < library.length; i++) {
+// display books on screen as text
+const displayBooks = (books) => {
+
+    for (let i = 0; i < books.length; i++) {
         // create section to place inside div
         const section = document.createElement("section");
 
@@ -31,9 +44,9 @@ const displayBooks = (library) => {
         const year_p = document.createElement("p");
 
         // apply text to created elements
-        title_h3.textContent = library[i].title;
-        author_p.textContent = library[i].author;
-        year_p.textContent = library[i].year;
+        title_h3.textContent = books[i].title;
+        author_p.textContent = books[i].author;
+        year_p.textContent = books[i].year;
 
         // append created elements to section element
         section.appendChild(title_h3);
@@ -45,90 +58,14 @@ const displayBooks = (library) => {
     }
 }
 
-// allow user to enter, title, author, year of book
 getAddBtn.addEventListener("click", () => {
-    const bookData = {
-        "title": getBookTitle.value,
-        "author": getBookAuthor.value,
-        "year": getBookYear.value
-    };
+    books.push({
+        title: getBookTitle.value,
+        author: getBookAuthor.value,
+        year: getBookYear.value
+    });
 
-    // set user data to string and store in localStorage
-    localStorage.setItem(getBookTitle.value, JSON.stringify(bookData));
+    displayBooks(books);
 
-    // pull user data and push to array
-    for (let i = 0; i < localStorage.length; i++) {
-        library.push(JSON.parse(localStorage.getItem(i)));
-    }
-    
-
-    displayBooks(library);
-
-    // reset inputs
-    resetData();
+    bookStorage();
 });
-
-console.log(library);
-
-/* PRACTICE OBJECT
-
-const library = {
-    "libraryName": "Chip's Library",
-    "created": 2019,
-    "books": [
-        {
-            "title": "The Road",
-            "author": "Cormac McCarthy",
-            "year": 2014
-        },
-        {
-            "title": "The Stand",
-            "author": "Stephen King",
-            "year": 1987
-        },
-        {
-            "title": "The Fellowship of the Ring",
-            "author": "J.R.R. Tolkien",
-            "year": 1954
-        }
-    ]
-}
-
-const displayBook = (obj) => {
-    const header_h1 = document.createElement("h1");
-    header_h1.textContent = obj["libraryName"];
-    selectBookHeader.appendChild(header_h1);
-
-    const subHeader_h2 = document.createElement("h2");
-    subHeader_h2.textContent = obj["created"];
-    selectBookHeader.appendChild(subHeader_h2);
-}
-
-const showBooks = (obj) => {
-    const books = obj["books"];
-
-    for (let i = 0; i < books.length; i++) {
-
-        // create elements
-        const createSection = document.createElement("section");
-        const createTitle = document.createElement("h3");
-        const createAuthor = document.createElement("p");
-        const createYear = document.createElement("p");
-
-        // apply text content to created elements
-        createTitle.textContent = books[i].title;
-        createAuthor.textContent = `Author: ${books[i].author}`;
-        createYear.textContent = `Year: ${books[i].year}`;
-
-        // append elements to created Section element
-        createSection.appendChild(createTitle);
-        createSection.appendChild(createAuthor);
-        createSection.appendChild(createYear);
-
-        // append created Section element to books area
-        selectBook.appendChild(createSection);
-    }
-}
-
-displayBook(library);
-showBooks(library); */
