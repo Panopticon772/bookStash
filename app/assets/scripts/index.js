@@ -17,13 +17,14 @@ const getBookData = document.querySelector("#book-data");
 // created books
 const selectBooks = document.querySelector("#books");
 
+// let books initially be set equal to an empty array
 let books = [];
 
 // store books as JSON string in localStorage
 const bookStorage = () => localStorage.setItem("books", JSON.stringify(books));
 
 // retrieve books from localStorage
-const retrieveBooks = () => JSON.parse(localStorage.getItem("books"));
+const retrieveBooks = () => localStorage.getItem("books") ? JSON.parse(localStorage.getItem("books")) : [];
 
 // reset inputs
 const resetData = () => {
@@ -32,20 +33,17 @@ const resetData = () => {
     getBookYear.value = "";
 }
 
-// add book render on page refresh
-
 // display books on screen as text
 const displayBooks = () => {
-
-    const books = retrieveBooks();
-    console.log(books);
+    let books = JSON.parse(localStorage.getItem("books"));
 
     for (let i = 0; i < books.length; i++) {
-        let bookRow = getBookData.insertRow(-1);
+    
+        let newBookRow = getBookData.insertRow(-1);
 
-        let titleCell = bookRow.insertCell(0);
-        let authorCell = bookRow.insertCell(1);
-        let yearCell = bookRow.insertCell(2);
+        let titleCell = newBookRow.insertCell(0);
+        let authorCell = newBookRow.insertCell(1);
+        let yearCell = newBookRow.insertCell(2);
 
         let titleText = document.createTextNode(books[i].title);
         let authorText = document.createTextNode(books[i].author);
@@ -58,17 +56,26 @@ const displayBooks = () => {
 }
 
 // check if user already has storage, if so, display books, otherwise print "Add books!"
-localStorage.length > 0 ? displayBooks() : console.log("Add books to get started!");
+if (localStorage.length > 0) {
+    displayBooks();
+} else {
+    console.log("Add some books to begin your library!");
+}
 
 getAddBtn.addEventListener("click", () => {
+    // if books already exist in localStorage, get that array and push new book into it, otherwise create a new arr and add the book
+    books = retrieveBooks();
+
+    // push user input values to array
     books.push({
         title: getBookTitle.value,
         author: getBookAuthor.value,
         year: getBookYear.value
     });
 
+    // store array as JSON
     bookStorage();
-});
 
-// 1 add render books function which displays books after page refresh
-// 2 table needs to generate row and inside row, the data
+    // reset user input
+    resetData();
+});
