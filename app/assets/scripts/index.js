@@ -35,24 +35,42 @@ const resetData = () => {
 
 // display books on screen as text
 const displayBooks = () => {
-    let books = JSON.parse(localStorage.getItem("books"));
 
-    for (let i = 0; i < books.length; i++) {
+    const myBooks = JSON.parse(localStorage.getItem("books"));
+
+    for (let i = 0; i < myBooks.length; i++) {
     
         let newBookRow = getBookData.insertRow(-1);
 
-        let titleCell = newBookRow.insertCell(0);
-        let authorCell = newBookRow.insertCell(1);
-        let yearCell = newBookRow.insertCell(2);
+        let idCell = newBookRow.insertCell(0);
+        let titleCell = newBookRow.insertCell(1);
+        let authorCell = newBookRow.insertCell(2);
+        let yearCell = newBookRow.insertCell(3);
 
-        let titleText = document.createTextNode(books[i].title);
-        let authorText = document.createTextNode(books[i].author);
-        let yearText = document.createTextNode(books[i].year);
+        let idText = document.createTextNode(myBooks[i].id);
+        let titleText = document.createTextNode(myBooks[i].title);
+        let authorText = document.createTextNode(myBooks[i].author);
+        let yearText = document.createTextNode(myBooks[i].year);
 
+        idCell.appendChild(idText);
         titleCell.appendChild(titleText);
         authorCell.appendChild(authorText);
         yearCell.appendChild(yearText);
     }
+}
+
+const renderBooks = () => {
+    
+}
+
+// give book an ID and increment by 1 on every loop
+const bookID = () => {
+    let id = 0;
+    for (let i = 0; i < books.length; i++) {
+        id++;
+    }
+
+    return id;
 }
 
 // check if user already has storage, if so, display books, otherwise print "Add books!"
@@ -68,6 +86,7 @@ getAddBtn.addEventListener("click", () => {
 
     // push user input values to array
     books.push({
+        id: bookID(),
         title: getBookTitle.value,
         author: getBookAuthor.value,
         year: getBookYear.value
@@ -75,6 +94,8 @@ getAddBtn.addEventListener("click", () => {
 
     // store array as JSON
     bookStorage();
+
+    console.log(books);
 
     // reset user input
     resetData();
