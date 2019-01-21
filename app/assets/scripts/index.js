@@ -35,32 +35,48 @@ const resetData = () => {
 
 // display books on screen as text
 const displayBooks = () => {
-
+    let arr = [];
     const myBooks = JSON.parse(localStorage.getItem("books"));
 
+    // loop over myBooks array
     for (let i = 0; i < myBooks.length; i++) {
-    
-        let newBookRow = getBookData.insertRow(-1);
-
-        let idCell = newBookRow.insertCell(0);
-        let titleCell = newBookRow.insertCell(1);
-        let authorCell = newBookRow.insertCell(2);
-        let yearCell = newBookRow.insertCell(3);
-
-        let idText = document.createTextNode(myBooks[i].id);
-        let titleText = document.createTextNode(myBooks[i].title);
-        let authorText = document.createTextNode(myBooks[i].author);
-        let yearText = document.createTextNode(myBooks[i].year);
-
-        idCell.appendChild(idText);
-        titleCell.appendChild(titleText);
-        authorCell.appendChild(authorText);
-        yearCell.appendChild(yearText);
+        // loop over property names
+        for (let key in myBooks[i]) {
+            // if property name is not found, store in arr
+            if (arr.indexOf(key) === -1) {
+                arr.push(key);
+            }
+        }
     }
-}
 
-const renderBooks = () => {
-    
+    // create table element
+    const table = document.createElement("table");
+
+    // insert new row in table
+    let tr = table.insertRow(-1);
+
+    // loop over arr, create table headers from values, then append to table row
+    for (let i = 0; i < arr.length; i++) {
+        const th = document.createElement("th");
+        th.innerHTML = arr[i];
+        tr.appendChild(th);
+    }
+
+    // loop over books array and create new table row
+    for (let i = 0; i < myBooks.length; i++) {
+        tr = table.insertRow(-1);
+
+        // loop over arr, set new cells to the property values
+        for (let j = 0; j < arr.length; j++) {
+            const tabCell = tr.insertCell(-1);
+            tabCell.innerHTML = myBooks[i][arr[j]];
+        }
+    }
+
+    // set div to empty string
+    selectBooks.innerHTML = "";
+    // append table to div
+    selectBooks.appendChild(table);
 }
 
 // give book an ID and increment by 1 on every loop
@@ -96,6 +112,7 @@ getAddBtn.addEventListener("click", () => {
     bookStorage();
 
     console.log(books);
+    displayBooks();
 
     // reset user input
     resetData();
