@@ -20,6 +20,12 @@ const selectBooks = document.querySelector("#books");
 // let books initially be set equal to an empty array
 let books = [];
 
+const capitalizeFirstLetter = (str) => {
+    // convert to string and set all to lowercase
+    const lower = String(str).toLowerCase();
+    return lower.replace(/(^| )(\w)/g, (val) => val.toUpperCase());
+}
+
 // store books as JSON string in localStorage
 const bookStorage = () => localStorage.setItem("books", JSON.stringify(books));
 
@@ -33,16 +39,14 @@ const resetData = () => {
     getBookYear.value = "";
 }
 
-// display books on screen as text
+// display books as table
 const displayBooks = () => {
     let arr = [];
     const myBooks = JSON.parse(localStorage.getItem("books"));
 
-    // loop over myBooks array
+    // extract book object properties to use as table headers (id, title, author, year)
     for (let i = 0; i < myBooks.length; i++) {
-        // loop over property names
         for (let key in myBooks[i]) {
-            // if property name is not found, store in arr
             if (arr.indexOf(key) === -1) {
                 arr.push(key);
             }
@@ -55,21 +59,27 @@ const displayBooks = () => {
     // insert new row in table
     let tr = table.insertRow(-1);
 
-    // loop over arr, create table headers from values, then append to table row
+    // create table headers from values, then append to table row
     for (let i = 0; i < arr.length; i++) {
         const th = document.createElement("th");
-        th.innerHTML = arr[i];
+        th.innerHTML = arr[i].toUpperCase();
         tr.appendChild(th);
     }
 
-    // loop over books array and create new table row
+    // loop over myBook arr and add JSON data (book object property values) to table as rows
     for (let i = 0; i < myBooks.length; i++) {
         tr = table.insertRow(-1);
 
-        // loop over arr, set new cells to the property values
         for (let j = 0; j < arr.length; j++) {
             const tabCell = tr.insertCell(-1);
-            tabCell.innerHTML = myBooks[i][arr[j]];
+            console.log(myBooks[i][arr[j]]);
+            // if not a number convert first letter of every word to uppercase
+            if (isNaN(myBooks[i][arr[j]])) {
+                tabCell.innerHTML = capitalizeFirstLetter(myBooks[i][arr[j]]);
+            } else {
+                tabCell.innerHTML = myBooks[i][arr[j]];
+            }
+            
         }
     }
 
@@ -111,7 +121,6 @@ getAddBtn.addEventListener("click", () => {
     // store array as JSON
     bookStorage();
 
-    console.log(books);
     displayBooks();
 
     // reset user input

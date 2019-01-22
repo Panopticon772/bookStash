@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>bookStash: A book tracking application.</title>
         <link rel="stylesheet" type="text/css" href="assets/styles/index.css">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Slabo+27px" rel="stylesheet">
     </head>
 
     <body>
@@ -29,6 +30,12 @@
             <input id="book-year" type="number" name="year" min="1">
 
             <button id="add-book">Add book</button>
+        </div>
+
+        <div class="container">
+            <label for="remove-book">Enter book ID to remove:</label>
+            <input type="text" name="remove-book">
+            <button>Remove book</button>
         </div>
 
         <div id="organize" class="container">
