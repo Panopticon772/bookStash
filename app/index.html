@@ -33,9 +33,9 @@
         </div>
 
         <div class="container">
-            <label for="remove-book">Enter book ID to remove:</label>
-            <input type="text" name="remove-book">
-            <button>Remove book</button>
+            <label for="remove-id">Enter book ID to remove:</label>
+            <input  id="remove-id" type="number" name="remove-id" min="0">
+            <button id="remove-book">Remove book</button>
         </div>
 
         <div id="organize" class="container">
@@ -49,8 +49,7 @@
         </div>
 
         <div id="book-library" class="container">
-            <div id="books">
-            </div>
+            <div id="books"></div>
         </div>
         
         <script src="assets/scripts/index.js"></script>

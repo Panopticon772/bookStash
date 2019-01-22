@@ -10,6 +10,9 @@ const getBookYear = document.querySelector("#book-year");
 const getAddBtn = document.querySelector("#add-book");
 const getRemoveBtn = document.querySelector("#remove-book");
 
+// id remove input
+const removeId = document.querySelector("#remove-id");
+
 // table selectors
 const getBookTable = document.querySelector("#book-table");
 const getBookData = document.querySelector("#book-data");
@@ -72,7 +75,6 @@ const displayBooks = () => {
 
         for (let j = 0; j < arr.length; j++) {
             const tabCell = tr.insertCell(-1);
-            console.log(myBooks[i][arr[j]]);
             // if not a number convert first letter of every word to uppercase
             if (isNaN(myBooks[i][arr[j]])) {
                 tabCell.innerHTML = capitalizeFirstLetter(myBooks[i][arr[j]]);
@@ -103,6 +105,7 @@ const bookID = () => {
 if (localStorage.length > 0) {
     displayBooks();
 } else {
+    // convert to open modal
     console.log("Add some books to begin your library!");
 }
 
@@ -125,4 +128,15 @@ getAddBtn.addEventListener("click", () => {
 
     // reset user input
     resetData();
+});
+
+// when clicked, removes correct book according to ID
+getRemoveBtn.addEventListener("click", () => {
+    const removeBookId =  removeId.value;
+    const bookLib = JSON.parse(localStorage.getItem("books"));
+    for (let i = 0; i < bookLib.length; i++) {
+        if (bookLib[i].id === 0) {
+            localStorage.removeItem(bookLib[i]);
+        }
+    }
 });
