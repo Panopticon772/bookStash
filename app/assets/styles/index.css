@@ -36,3 +36,13 @@ table, th, td {
     text-align: center;
     background-color: rgb(44, 44, 44);
 }
+
+#erase-btn {
+    padding: 0.3rem;
+    border: 1px solid #fff;
+    background-color: rgb(170, 8, 8);
+}
+
+#erase-btn:hover {
+    background-color: 
+}

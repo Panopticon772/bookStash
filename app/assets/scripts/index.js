@@ -10,15 +10,20 @@ const getBookYear = document.querySelector("#book-year");
 const getAddBtn = document.querySelector("#add-book");
 const getRemoveBtn = document.querySelector("#remove-book");
 
+// table selector
+const bookTable = document.querySelector("#book-table");
+
 // id remove input
 const removeId = document.querySelector("#remove-id");
 
-// table selectors
-const getBookTable = document.querySelector("#book-table");
-const getBookData = document.querySelector("#book-data");
+// lib div
+const libDiv = document.querySelector("#book-library");
 
-// created books
+// created books library
 const selectBooks = document.querySelector("#books");
+
+// erase library btn
+const eraseBooksBtn = document.querySelector("#erase-btn");
 
 // let books initially be set equal to an empty array
 let books = [];
@@ -57,7 +62,9 @@ const displayBooks = () => {
     }
 
     // create table element
-    const table = document.createElement("table");
+    let table = document.createElement("table");
+    // set table id
+    table.setAttribute("id", "book-table");
 
     // insert new row in table
     let tr = table.insertRow(-1);
@@ -89,6 +96,7 @@ const displayBooks = () => {
     selectBooks.innerHTML = "";
     // append table to div
     selectBooks.appendChild(table);
+    
 }
 
 // give book an ID and increment by 1 on every loop
@@ -132,11 +140,20 @@ getAddBtn.addEventListener("click", () => {
 
 // when clicked, removes correct book according to ID
 getRemoveBtn.addEventListener("click", () => {
-    const removeBookId =  removeId.value;
-    const bookLib = JSON.parse(localStorage.getItem("books"));
-    for (let i = 0; i < bookLib.length; i++) {
-        if (bookLib[i].id === 0) {
-            localStorage.removeItem(bookLib[i]);
-        }
+    const books = JSON.parse(localStorage.getItem("books"));
+    console.log(books);
+    for (let i = 0; i < books.length; i++) {
+        console.log(books[i].id);
     }
 });
+
+// remove table from screen and clear data from localStorage
+eraseBooksBtn.addEventListener("click", () => {
+    selectBooks.innerHTML = "";
+    localStorage.clear();
+});
+
+console.log(removeId.value);
+
+/* 1. need to add warning to erase button
+2. fix remove btn */
