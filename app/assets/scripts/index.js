@@ -25,6 +25,10 @@ const selectBooks = document.querySelector("#books");
 // erase library btn
 const eraseBooksBtn = document.querySelector("#erase-btn");
 
+// modal selectors
+const modal = document.querySelector(".modal");
+const closeModalBtn = document.querySelector(".close-modal");
+
 // let books initially be set equal to an empty array
 let books = [];
 
@@ -32,6 +36,11 @@ const capitalizeFirstLetter = (str) => {
     // convert to string and set all to lowercase
     const lower = String(str).toLowerCase();
     return lower.replace(/(^| )(\w)/g, (val) => val.toUpperCase());
+}
+
+const clearData = () => {
+    selectBooks.innerHTML = "";
+    localStorage.clear();
 }
 
 // store books as JSON string in localStorage
@@ -109,6 +118,17 @@ const bookID = () => {
     return id;
 }
 
+// toggle modal
+const toggleModal = () => {
+    modal.classList.toggle("show-modal");
+}
+
+const windowOnClick = (e) => {
+    if (e.target === modal) {
+        toggleModal();
+    }
+}
+
 // check if user already has storage, if so, display books, otherwise print "Add books!"
 if (localStorage.length > 0) {
     displayBooks();
@@ -149,9 +169,12 @@ getRemoveBtn.addEventListener("click", () => {
 
 // remove table from screen and clear data from localStorage
 eraseBooksBtn.addEventListener("click", () => {
-    selectBooks.innerHTML = "";
-    localStorage.clear();
+    toggleModal();
 });
+
+closeModalBtn.addEventListener("click", toggleModal);
+
+window.addEventListener("click", windowOnClick);
 
 console.log(removeId.value);
 
