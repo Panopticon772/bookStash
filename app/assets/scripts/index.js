@@ -34,7 +34,7 @@ const yesBtn = document.querySelector("#delete-yes");
 const noBtn = document.querySelector("#delete-no");
 
 // let books initially be set equal to an empty array
-let books = [];
+let books;
 
 const capitalizeFirstLetter = (str) => {
     // convert to string and set all to lowercase
@@ -89,13 +89,13 @@ const displayBooks = () => {
         tr.appendChild(th);
     }
 
-    // loop over myBook arr and add JSON data (book object property values) to table as rows
+    // add rows to table
     for (let i = 0; i < myBooks.length; i++) {
         tr = table.insertRow(-1);
-
+        // add table cells for each property value in obj
         for (let j = 0; j < arr.length; j++) {
             const tabCell = tr.insertCell(-1);
-            // if not a number convert first letter of every word to uppercase
+            // if value is not a number convert first letter of every word to uppercase
             if (isNaN(myBooks[i][arr[j]])) {
                 tabCell.innerHTML = capitalizeFirstLetter(myBooks[i][arr[j]]);
             } else {
@@ -141,7 +141,8 @@ if (localStorage.length > 0) {
     console.log("Add some books to begin your library!");
 }
 
-getAddBtn.addEventListener("click", () => {
+getAddBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     // if books already exist in localStorage, get that array and push new book into it, otherwise create a new arr and add the book
     books = retrieveBooks();
 
@@ -171,7 +172,12 @@ getAddBtn.addEventListener("click", () => {
 // when clicked, removes correct book according to ID
 getRemoveBtn.addEventListener("click", () => {
     const books = JSON.parse(localStorage.getItem("books"));
-    console.log(books);
+    for (let i = 0; i < books.length; i++) {
+        console.log(books[i].id);
+        if (Number(removeId.value) === books[i].id) {
+            console.log("cool!")
+        }
+    }
 });
 
 // remove table from screen and clear data from localStorage
@@ -189,7 +195,7 @@ yesBtn.addEventListener("click", () => {
 
 noBtn.addEventListener("click", toggleModal);
 
-console.log(removeId.value);
-
 /* 1. need to add warning to erase button -> done 1/23/19
-2. fix remove btn */
+2. fix remove btn
+3. filter books options, hightlight?
+ */
