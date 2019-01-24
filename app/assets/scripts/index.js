@@ -29,6 +29,10 @@ const eraseBooksBtn = document.querySelector("#erase-btn");
 const modal = document.querySelector(".modal");
 const closeModalBtn = document.querySelector(".close-modal");
 
+// modal btn choices
+const yesBtn = document.querySelector("#delete-yes");
+const noBtn = document.querySelector("#delete-no");
+
 // let books initially be set equal to an empty array
 let books = [];
 
@@ -110,7 +114,7 @@ const displayBooks = () => {
 
 // give book an ID and increment by 1 on every loop
 const bookID = () => {
-    let id = 0;
+    let id = 1;
     for (let i = 0; i < books.length; i++) {
         id++;
     }
@@ -141,30 +145,33 @@ getAddBtn.addEventListener("click", () => {
     // if books already exist in localStorage, get that array and push new book into it, otherwise create a new arr and add the book
     books = retrieveBooks();
 
-    // push user input values to array
-    books.push({
-        id: bookID(),
-        title: getBookTitle.value,
-        author: getBookAuthor.value,
-        year: getBookYear.value
-    });
+    if (getBookTitle.value === "") {
+        alert("Please enter a title.");
+    } else if (getBookAuthor.value === "") {
+        alert("Please enter an author.");
+    } else {
+        // push user input values to array
+        books.push({
+            id: bookID(),
+            title: getBookTitle.value,
+            author: getBookAuthor.value,
+            year: getBookYear.value
+        });
 
-    // store array as JSON
-    bookStorage();
+        // store array as JSON
+        bookStorage();
 
-    displayBooks();
+        displayBooks();
 
-    // reset user input
-    resetData();
+        // reset user input
+        resetData();
+    }
 });
 
 // when clicked, removes correct book according to ID
 getRemoveBtn.addEventListener("click", () => {
     const books = JSON.parse(localStorage.getItem("books"));
     console.log(books);
-    for (let i = 0; i < books.length; i++) {
-        console.log(books[i].id);
-    }
 });
 
 // remove table from screen and clear data from localStorage
@@ -172,11 +179,17 @@ eraseBooksBtn.addEventListener("click", () => {
     toggleModal();
 });
 
-closeModalBtn.addEventListener("click", toggleModal);
-
 window.addEventListener("click", windowOnClick);
+
+// clear data after confirmation
+yesBtn.addEventListener("click", () => {
+    clearData();
+    toggleModal();
+});
+
+noBtn.addEventListener("click", toggleModal);
 
 console.log(removeId.value);
 
-/* 1. need to add warning to erase button
+/* 1. need to add warning to erase button -> done 1/23/19
 2. fix remove btn */
