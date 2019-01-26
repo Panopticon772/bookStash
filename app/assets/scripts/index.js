@@ -122,6 +122,19 @@ const bookID = () => {
     return id;
 }
 
+const removeBook = (id) => {
+    // parse from local storage
+    const bookArray = JSON.parse(localStorage.getItem("books"));
+    // convert id from str to num
+    const num = Number(id);
+    //loop
+    for (let i = bookArray.length - 1; i >= 0; i--) {
+        if (bookArray[i] === num) {
+            delete bookArray[i];
+        }
+    }
+}
+
 // toggle modal
 const toggleModal = () => {
     modal.classList.toggle("show-modal");
@@ -171,13 +184,7 @@ getAddBtn.addEventListener("click", (e) => {
 
 // when clicked, removes correct book according to ID
 getRemoveBtn.addEventListener("click", () => {
-    const books = JSON.parse(localStorage.getItem("books"));
-    for (let i = 0; i < books.length; i++) {
-        console.log(books[i].id);
-        if (Number(removeId.value) === books[i].id) {
-            console.log("cool!")
-        }
-    }
+    removeBook(removeId.value)
 });
 
 // remove table from screen and clear data from localStorage
