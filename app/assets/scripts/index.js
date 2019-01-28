@@ -1,5 +1,6 @@
 // user lib input selector
 const getLibName = document.querySelector("#library-name");
+const libNameBtn = document.querySelector("#add-library-name");
 
 // book input selectors
 const getBookTitle = document.querySelector("#book-title");
@@ -22,6 +23,9 @@ const libDiv = document.querySelector("#book-library");
 // created books library
 const selectBooks = document.querySelector("#books");
 
+// sort
+const organizeBooks = document.querySelector("#organize");
+
 // erase library btn
 const eraseBooksBtn = document.querySelector("#erase-btn");
 
@@ -39,14 +43,27 @@ let booksArray = localStorage.getItem("books") ? JSON.parse(localStorage.getItem
 // store books array as JSON string in localStorage
 const bookStorage = () => localStorage.setItem("books", JSON.stringify(booksArray));
 
-const capitalizeFirstLetter = (str) => {
+const capitalizeEveryFirstLetter = (str) => {
     // convert to string and set all to lowercase
     const lower = String(str).toLowerCase();
     return lower.replace(/(^| )(\w)/g, (val) => val.toUpperCase());
 }
 
+const displayLibName = () => {
+    // create H1 element
+    const h1 = document.createElement("h1");
+    // if lib name already exists, append it to page
+    if (Object.keys(localStorage).includes("name")) {
+        h1.setAttribute("id", "title-lib-name");
+        h1.textContent = `${localStorage.getItem("name")}'s library`;
+        libDiv.appendChild(h1);
+    }
+}
+
+const capitalizeFirst = (str) => str.charAt(0).toUpperCase() + str.substring(1);
+
 const clearData = () => {
-    localStorage.removeItem("books");
+    localStorage.clear();
 }
 
 // reset inputs
@@ -56,17 +73,15 @@ const resetData = () => {
     getBookYear.value = "";
 }
 
-// find index in array that matches the title
 const removeBook = (bookTitle) => {
-    // loop over books arr
+    // removes book obj from array
     for (let i = 0; i < booksArray.length; i++) {
         if (booksArray[i].title === bookTitle) {
             booksArray.splice(i, 1);
         }
     }
-    // overwrite current books arr in local storage
+    // update local Storage
     bookStorage();
-    
 }
 
 // toggle modal
@@ -79,6 +94,19 @@ const windowOnClick = (e) => {
         toggleModal();
     }
 }
+
+// display lib name if it already exists
+displayLibName();
+
+// when clicked creates name for library
+libNameBtn.addEventListener("click", () => {
+    const h1 = document.createElement("h1");
+    localStorage.setItem("name", capitalizeFirst(getLibName.value));
+    h1.setAttribute("id", "title-lib-name");
+    h1.textContent = `${localStorage.getItem("name")}'s library`;
+    libDiv.appendChild(h1);
+    getLibName.value = "";
+});
 
 getAddBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -119,15 +147,15 @@ window.addEventListener("click", windowOnClick);
 // clear data after confirmation
 yesBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    clearData();
     toggleModal();
+    document.querySelector("#title-lib-name").remove();
+    clearData();
 });
 
 noBtn.addEventListener("click", toggleModal);
 
-/* 1. need to add warning to erase button -> done 1/23/19
-2. fix remove btn
+/*
 3. filter books options, hightlight?
 4. display as table
-5. remove book by title => done 1/27/2019
+6. add/remove btn, not sharing same book array?
  */
