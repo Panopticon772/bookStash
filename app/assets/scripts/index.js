@@ -46,8 +46,7 @@ const capitalizeFirstLetter = (str) => {
 }
 
 const clearData = () => {
-    selectBooks.innerHTML = "";
-    localStorage.clear();
+    localStorage.removeItem("books");
 }
 
 // reset inputs
@@ -57,23 +56,17 @@ const resetData = () => {
     getBookYear.value = "";
 }
 
-// give book an ID and increment by 1 on every loop
-// const bookID = () => {
-//     let id = 1;
-//     for (let i = 0; i < booksArray.length; i++) {
-//         id++;
-//     }
-
-//     return id;
-// }
-
-const removeBook = (title) => {
+// find index in array that matches the title
+const removeBook = (bookTitle) => {
+    // loop over books arr
     for (let i = 0; i < booksArray.length; i++) {
-        if (title === booksArray[i].title) {
-            booksArray.splice(booksArray[i], 1);
-            localStorage.setItem("books", JSON.stringify(booksArray));
+        if (booksArray[i].title === bookTitle) {
+            booksArray.splice(i, 1);
         }
     }
+    // overwrite current books arr in local storage
+    bookStorage();
+    
 }
 
 // toggle modal
@@ -97,9 +90,9 @@ getAddBtn.addEventListener("click", (e) => {
     } else {
         // push user input values to array
         booksArray.push({
-            title: getBookTitle.value,
-            author: getBookAuthor.value,
-            year: getBookYear.value
+            title: getBookTitle.value.toLowerCase(),
+            author: getBookAuthor.value.toLowerCase(),
+            year: getBookYear.value.toLowerCase()
         });
 
         bookStorage();
@@ -111,7 +104,8 @@ getAddBtn.addEventListener("click", (e) => {
 // when clicked, removes correct book according to ID
 getRemoveBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    removeBook(removeId.value);
+    removeBook(removeId.value.toLowerCase());
+    removeId.value = "";
 });
 
 // erase library from local storage
@@ -135,4 +129,5 @@ noBtn.addEventListener("click", toggleModal);
 2. fix remove btn
 3. filter books options, hightlight?
 4. display as table
+5. remove book by title => done 1/27/2019
  */
