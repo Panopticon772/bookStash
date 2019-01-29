@@ -1,7 +1,6 @@
 // user lib input selector
 const getLibName = document.querySelector("#library-name");
 const libNameBtn = document.querySelector("#add-library-name");
-const libTitle = document.querySelector("#title-lib-name");
 
 // book input selectors
 const getBookTitle = document.querySelector("#book-title");
@@ -26,6 +25,10 @@ const selectBooks = document.querySelector("#books");
 
 // sort
 const organizeBooks = document.querySelector("#organize");
+
+// library title selectors
+const libTitleDiv = document.querySelector("#library-title");
+const libTitle = document.querySelector("#title-lib-name");
 
 // erase library btn
 const eraseBooksBtn = document.querySelector("#erase-btn");
@@ -55,9 +58,8 @@ const displayLibName = () => {
     const h1 = document.createElement("h1");
     // if lib name already exists, append it to page
     if (Object.keys(localStorage).includes("name")) {
-        h1.setAttribute("id", "title-lib-name");
         h1.textContent = `${localStorage.getItem("name")}'s library`;
-        libDiv.appendChild(h1);
+        libTitle.appendChild(h1);
     }
 }
 
@@ -103,9 +105,8 @@ displayLibName();
 libNameBtn.addEventListener("click", () => {
     const h1 = document.createElement("h1");
     localStorage.setItem("name", capitalizeFirst(getLibName.value));
-    h1.setAttribute("id", "title-lib-name");
     h1.textContent = `${localStorage.getItem("name")}'s library`;
-    libDiv.appendChild(h1);
+    libTitle.appendChild(h1);
     getLibName.value = "";
 });
 
@@ -149,11 +150,14 @@ yesBtn.addEventListener("click", (e) => {
     e.preventDefault();
     toggleModal();
     // if id exists, remove it
-    if(libTitle) {
-        libTitle.remove();
+    if (libTitle) {
+        libTitle.removeChild(h1);
+    } else {
+        console.log("could not find that title")
     }
-    clearData();
     booksArray.length = 0;
+    clearData();
+    // location.reload(true);
 });
 
 noBtn.addEventListener("click", toggleModal);
@@ -164,5 +168,5 @@ console.log(booksArray)
 /*
 3. filter books options, hightlight?
 4. display as table
-7. remove whitespace in books inputs
+5. lib name not being removed until page refresh
  */
