@@ -58,8 +58,7 @@ const displayLibName = () => {
     const h1 = document.createElement("h1");
     // if lib name already exists, append it to page
     if (Object.keys(localStorage).includes("name")) {
-        h1.textContent = `${localStorage.getItem("name")}'s library`;
-        libTitle.appendChild(h1);
+        libTitle.textContent = `${localStorage.getItem("name")}'s library`;
     }
 }
 
@@ -103,10 +102,16 @@ displayLibName();
 
 // when clicked creates name for library
 libNameBtn.addEventListener("click", () => {
-    const h1 = document.createElement("h1");
+    // const h1 = document.createElement("h1");
+    // localStorage.setItem("name", capitalizeFirst(getLibName.value));
+    // h1.textContent = `${localStorage.getItem("name")}'s library`;
+    // libTitle.appendChild(h1);
+    // getLibName.value = "";
+
+    // const h1 = document.createElement("h1");
     localStorage.setItem("name", capitalizeFirst(getLibName.value));
-    h1.textContent = `${localStorage.getItem("name")}'s library`;
-    libTitle.appendChild(h1);
+    libTitle.textContent = `${localStorage.getItem("name")}'s library`;
+    // libTitle.appendChild(h1);
     getLibName.value = "";
 });
 
@@ -148,16 +153,14 @@ window.addEventListener("click", windowOnClick);
 // clear data after confirmation
 yesBtn.addEventListener("click", (e) => {
     e.preventDefault();
+    // close modal
     toggleModal();
-    // if id exists, remove it
-    if (libTitle) {
-        libTitle.removeChild(h1);
-    } else {
-        console.log("could not find that title")
-    }
+    // reset books array
     booksArray.length = 0;
+    // clear local storage
     clearData();
-    // location.reload(true);
+    // set library title name to empty string
+    libTitle.textContent = "";
 });
 
 noBtn.addEventListener("click", toggleModal);
@@ -168,5 +171,4 @@ console.log(booksArray)
 /*
 3. filter books options, hightlight?
 4. display as table
-5. lib name not being removed until page refresh
  */
