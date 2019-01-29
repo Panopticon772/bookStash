@@ -1,6 +1,7 @@
 // user lib input selector
 const getLibName = document.querySelector("#library-name");
 const libNameBtn = document.querySelector("#add-library-name");
+const libTitle = document.querySelector("#title-lib-name");
 
 // book input selectors
 const getBookTitle = document.querySelector("#book-title");
@@ -108,9 +109,7 @@ libNameBtn.addEventListener("click", () => {
     getLibName.value = "";
 });
 
-getAddBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-
+getAddBtn.addEventListener("click", () => {
     if (getBookTitle.value === "") {
         alert("Please enter a title.");
     } else if (getBookAuthor.value === "") {
@@ -118,13 +117,14 @@ getAddBtn.addEventListener("click", (e) => {
     } else {
         // push user input values to array
         booksArray.push({
-            title: getBookTitle.value.toLowerCase(),
-            author: getBookAuthor.value.toLowerCase(),
-            year: getBookYear.value.toLowerCase()
+            title: getBookTitle.value.toLowerCase().trim(),
+            author: getBookAuthor.value.toLowerCase().trim(),
+            year: getBookYear.value.toLowerCase().trim()
         });
 
+        // save book arr to local storage
         bookStorage();
-
+        // reset inputs
         resetData();
     }
 });
@@ -148,14 +148,21 @@ window.addEventListener("click", windowOnClick);
 yesBtn.addEventListener("click", (e) => {
     e.preventDefault();
     toggleModal();
-    document.querySelector("#title-lib-name").remove();
+    // if id exists, remove it
+    if(libTitle) {
+        libTitle.remove();
+    }
     clearData();
+    booksArray.length = 0;
 });
 
 noBtn.addEventListener("click", toggleModal);
 
+// errors
+console.log(booksArray)
+
 /*
 3. filter books options, hightlight?
 4. display as table
-6. add/remove btn, not sharing same book array?
+7. remove whitespace in books inputs
  */
