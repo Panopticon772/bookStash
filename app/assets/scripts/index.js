@@ -21,6 +21,7 @@ const removeId = document.querySelector("#remove-id");
 const libDiv = document.querySelector("#book-library");
 
 // created books library
+const ul = document.querySelector("ul");
 const selectBooks = document.querySelector("#books");
 
 // sort
@@ -54,13 +55,21 @@ const capitalizeEveryFirstLetter = (str) => {
 }
 
 const displayLibName = () => {
-    // create H1 element
-    const h1 = document.createElement("h1");
     // if lib name already exists, append it to page
     if (Object.keys(localStorage).includes("name")) {
         libTitle.textContent = `${localStorage.getItem("name")}'s library`;
     }
 }
+
+const tableMaker = () => {
+    for (let i = 0; i < booksArray.length; i++) {
+        const li = document.createElement("li");
+        li.textContent = `Title: ${booksArray[i].title}, Author: ${booksArray[i].author}, Year: ${booksArray[i].year}`;
+        ul.appendChild(li);
+    }
+}
+
+console.log(tableMaker())
 
 const capitalizeFirst = (str) => str.charAt(0).toUpperCase() + str.substring(1);
 
@@ -102,16 +111,8 @@ displayLibName();
 
 // when clicked creates name for library
 libNameBtn.addEventListener("click", () => {
-    // const h1 = document.createElement("h1");
-    // localStorage.setItem("name", capitalizeFirst(getLibName.value));
-    // h1.textContent = `${localStorage.getItem("name")}'s library`;
-    // libTitle.appendChild(h1);
-    // getLibName.value = "";
-
-    // const h1 = document.createElement("h1");
     localStorage.setItem("name", capitalizeFirst(getLibName.value));
     libTitle.textContent = `${localStorage.getItem("name")}'s library`;
-    // libTitle.appendChild(h1);
     getLibName.value = "";
 });
 
@@ -166,7 +167,7 @@ yesBtn.addEventListener("click", (e) => {
 noBtn.addEventListener("click", toggleModal);
 
 // errors
-console.log(booksArray)
+
 
 /*
 3. filter books options, hightlight?

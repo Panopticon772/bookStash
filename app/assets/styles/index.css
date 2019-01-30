@@ -36,6 +36,10 @@ input:invalid {
     margin: 1.0rem;
 }
 
+#books {
+    margin: 1.0rem;
+}
+
 table, th, td {
     table-layout: fixed; /* size content according to width of headings */
     width: 100%; /* expand to fit any container size */
@@ -47,7 +51,9 @@ table, th, td {
 
 .btn {
     padding: 0.3rem;
-    border-radius: 7px;
+    border-radius: 5px;
+    background-color: rgb(80, 136, 172);
+    border: 1px solid #000;
 }
 
 #erase-btn {
