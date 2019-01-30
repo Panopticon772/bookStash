@@ -77,7 +77,26 @@ const tableMaker = () => {
         let newText = document.createTextNode(ele.toUpperCase());
         newCell.appendChild(newText);
     });
-    
+
+    booksArray.forEach((book) => {
+        // create row for each obj
+        let bookRow = table.insertRow(-1);
+        // insert cells in row
+        let titleCell = bookRow.insertCell(-1);
+        let authorCell = bookRow.insertCell(-1);
+        let yearCell = bookRow.insertCell(-1);
+        // insert text into cells
+        let titleText = document.createTextNode(capitalizeEveryFirstLetter(book.title));
+        let authorText = document.createTextNode(capitalizeEveryFirstLetter(book.author));
+        let yearText = document.createTextNode(capitalizeEveryFirstLetter(book.year));
+        // put text into cells
+        titleCell.appendChild(titleText);
+        authorCell.appendChild(authorText);
+        yearCell.appendChild(yearText);
+        // append new row to table
+        table.appendChild(bookRow);
+    });
+
     // append table to books div
     selectBooks.appendChild(table);
 }
