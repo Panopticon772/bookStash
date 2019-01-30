@@ -62,11 +62,24 @@ const displayLibName = () => {
 }
 
 const tableMaker = () => {
-    for (let i = 0; i < booksArray.length; i++) {
-        const li = document.createElement("li");
-        li.textContent = `Title: ${booksArray[i].title}, Author: ${booksArray[i].author}, Year: ${booksArray[i].year}`;
-        ul.appendChild(li);
-    }
+    // create table element
+    const table = document.createElement("table");
+    // set keys equal to ["title", "author", "year"]
+    const keys = Object.keys(booksArray[0]);
+    // create 1 row for table
+    let newRow = table.insertRow(-1);
+
+    // iterate over each element in keys (title, author, year)
+    keys.forEach((ele) => {
+        // insert a cell for every element
+        let newCell = newRow.insertCell(-1);
+        // set cell text equal to value of element
+        let newText = document.createTextNode(ele.toUpperCase());
+        newCell.appendChild(newText);
+    });
+    
+    // append table to books div
+    selectBooks.appendChild(table);
 }
 
 console.log(tableMaker())
