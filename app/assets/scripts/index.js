@@ -21,7 +21,6 @@ const removeId = document.querySelector("#remove-id");
 const libDiv = document.querySelector("#book-library");
 
 // created books library
-const ul = document.querySelector("ul");
 const selectBooks = document.querySelector("#books");
 
 // sort
@@ -64,6 +63,8 @@ const displayLibName = () => {
 const tableMaker = () => {
     // create table element
     const table = document.createElement("table");
+    // give table id of book-table
+    table.id = "book-table";
     // set keys equal to ["title", "author", "year"]
     const keys = Object.keys(booksArray[0]);
     // create 1 row for table
@@ -98,10 +99,8 @@ const tableMaker = () => {
     });
 
     // append table to books div
-    selectBooks.appendChild(table);
+    return table;
 }
-
-console.log(tableMaker())
 
 const capitalizeFirst = (str) => str.charAt(0).toUpperCase() + str.substring(1);
 
@@ -138,8 +137,9 @@ const windowOnClick = (e) => {
     }
 }
 
-// display lib name if it already exists
 displayLibName();
+
+selectBooks.appendChild(tableMaker());
 
 // when clicked creates name for library
 libNameBtn.addEventListener("click", () => {
@@ -160,9 +160,12 @@ getAddBtn.addEventListener("click", () => {
             author: getBookAuthor.value.toLowerCase().trim(),
             year: getBookYear.value.toLowerCase().trim()
         });
-
         // save book arr to local storage
         bookStorage();
+        // clear existing table
+        selectBooks.textContent = "";
+        // append new table
+        selectBooks.appendChild(tableMaker());
         // reset inputs
         resetData();
     }
@@ -172,6 +175,10 @@ getAddBtn.addEventListener("click", () => {
 getRemoveBtn.addEventListener("click", (e) => {
     e.preventDefault();
     removeBook(removeId.value.toLowerCase());
+    // clear existing table
+    selectBooks.textContent = "";
+    // append new table
+    selectBooks.appendChild(tableMaker());
     removeId.value = "";
 });
 
@@ -192,16 +199,18 @@ yesBtn.addEventListener("click", (e) => {
     booksArray.length = 0;
     // clear local storage
     clearData();
-    // set library title name to empty string
+    // set library title name and book table to empty string
     libTitle.textContent = "";
+    selectBooks.textContent = "";
 });
 
 noBtn.addEventListener("click", toggleModal);
 
 // errors
 
-
 /*
 3. filter books options, hightlight?
-4. display as table
+5. table item removed when remove book clicked
+6. book row added automatically instead of on page refresh
+7. only call tablemaker when an item is in books arr
  */
