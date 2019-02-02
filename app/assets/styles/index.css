@@ -13,6 +13,10 @@ body {
     color: #fff;
 }
 
+.container {
+    margin: 1.0rem;
+}
+
 #heading {
     font-family: "Merriweather", sans-serif;
     background-color: rgb(10, 10, 10);
@@ -24,20 +28,6 @@ input:valid {
 
 input:invalid {
     box-shadow: 0 0 5px 1px red;
-}
-
-#book-info {
-}
-
-#organize {
-}
-
-.container {
-    margin: 1.0rem;
-}
-
-#books {
-    margin: 1.0rem;
 }
 
 table, th, td {
@@ -54,6 +44,7 @@ table, th, td {
     border-radius: 5px;
     background-color: rgb(80, 136, 172);
     border: 1px solid #000;
+    cursor: pointer;
 }
 
 #erase-btn {

@@ -1,43 +1,47 @@
-// user lib input selector
+// LIBRARY NAME
 const getLibName = document.querySelector("#library-name");
 const libNameBtn = document.querySelector("#add-library-name");
 
-// book input selectors
+// BOOK INPUTS
 const getBookTitle = document.querySelector("#book-title");
 const getBookAuthor = document.querySelector("#book-author");
 const getBookYear = document.querySelector("#book-year");
 
-// add and remove btn
+// ADD AND REMOVE
 const getAddBtn = document.querySelector("#add-book");
 const getRemoveBtn = document.querySelector("#remove-book");
 
-// table selector
+// TABLE
 const bookTable = document.querySelector("#book-table");
 
-// remove id input
+// REMOVE BOOKS
 const removeId = document.querySelector("#remove-id");
 
 // lib div
 const libDiv = document.querySelector("#book-library");
 
-// created books library
+// BOOKS LIBRARY
 const selectBooks = document.querySelector("#books");
 
-// sort
+// SORT BOOKS
+// organize div
 const organizeBooks = document.querySelector("#organize");
+// book sort input
+const sortInput = document.querySelector("#book-sort");
+const sortBtn = document.querySelector("#sort-btn");
 
-// library title selectors
+// LIBRARY NAME DISPLAY
 const libTitleDiv = document.querySelector("#library-title");
 const libTitle = document.querySelector("#title-lib-name");
 
-// erase library btn
+// ERASE LIBRARY
 const eraseBooksBtn = document.querySelector("#erase-btn");
 
-// modal selectors
+// MODAL
 const modal = document.querySelector(".modal");
 const closeModalBtn = document.querySelector(".close-modal");
 
-// modal btn choices
+// MODAL BTNS
 const yesBtn = document.querySelector("#delete-yes");
 const noBtn = document.querySelector("#delete-no");
 
@@ -98,8 +102,23 @@ const tableMaker = () => {
         table.appendChild(bookRow);
     });
 
-    // append table to books div
+    // return table to function
     return table;
+}
+
+// filter books based on title, author, year. should highlight that book
+const searchBooks = (text) => {
+    // when user enters search text, book should be highlighted on screen. if many books, should scroll down to that book. when search btn is clicked, should go through books array and look for that book
+    // get all td elements
+    let tds = document.getElementsByTagName("td");
+    for (let i = 0; i < tds.length; i++) {
+        if (tds[i].textContent.toLowerCase() === text) {
+            tds[i].style.backgroundColor = "rgb(221, 167, 17)";
+        } else {
+            console.log("Could not find book!");
+        }
+    }
+    sortInput.value = "";
 }
 
 const capitalizeFirst = (str) => str.charAt(0).toUpperCase() + str.substring(1);
@@ -141,13 +160,14 @@ displayLibName();
 
 selectBooks.appendChild(tableMaker());
 
-// when clicked creates name for library
+// LIBRARY NAME BTN
 libNameBtn.addEventListener("click", () => {
     localStorage.setItem("name", capitalizeFirst(getLibName.value));
     libTitle.textContent = `${localStorage.getItem("name")}'s library`;
     getLibName.value = "";
 });
 
+// ADD BOOK BTN
 getAddBtn.addEventListener("click", () => {
     if (getBookTitle.value === "") {
         alert("Please enter a title.");
@@ -171,7 +191,7 @@ getAddBtn.addEventListener("click", () => {
     }
 });
 
-// when clicked, removes correct book according to ID
+// REMOVE BOOK BTN
 getRemoveBtn.addEventListener("click", (e) => {
     e.preventDefault();
     removeBook(removeId.value.toLowerCase());
@@ -182,7 +202,22 @@ getRemoveBtn.addEventListener("click", (e) => {
     removeId.value = "";
 });
 
-// erase library from local storage
+// SEARCH BOOKS
+sortBtn.addEventListener("click", () => {
+    let e = document.querySelector("#sort-by");
+    console.log(typeof e);
+    console.log(typeof e.selectedOptions[0].text);
+
+    if (e.selectedOptions[0].text === "title") {
+        searchBooks(sortInput.value.toLowerCase());
+    } else if (e.selectedOptions[0].text === "author") {
+        searchBooks(sortInput.value.toLowerCase());
+    } else {
+        searchBooks(sortInput.value.toLowerCase());
+    }
+});
+
+// ERASE LIBRARY BTN
 eraseBooksBtn.addEventListener("click", (e) => {
     e.preventDefault();
     toggleModal();
@@ -209,8 +244,5 @@ noBtn.addEventListener("click", toggleModal);
 // errors
 
 /*
-3. filter books options, hightlight?
-5. table item removed when remove book clicked
-6. book row added automatically instead of on page refresh
-7. only call tablemaker when an item is in books arr
+3. filter books options, currently highlights all no matter what select option is
  */
