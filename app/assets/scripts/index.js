@@ -39,11 +39,12 @@ const eraseBooksBtn = document.querySelector("#erase-btn");
 
 // MODAL
 const modal = document.querySelector(".modal");
-const closeModalBtn = document.querySelector(".close-modal");
 
 // MODAL BTNS
 const yesBtn = document.querySelector("#delete-yes");
 const noBtn = document.querySelector("#delete-no");
+
+// SEARCH MODAL
 
 // set books equal to local storage if it already exists, if not, set to empty array
 let booksArray = localStorage.getItem("books") ? JSON.parse(localStorage.getItem("books")) : [];
@@ -106,16 +107,15 @@ const tableMaker = () => {
     return table;
 }
 
-// filter books based on title, author, year. should highlight that book
+// search books based on matching criteria
 const searchBooks = (text) => {
-    // when user enters search text, book should be highlighted on screen. if many books, should scroll down to that book. when search btn is clicked, should go through books array and look for that book
     // get all td elements
     let tds = document.getElementsByTagName("td");
     for (let i = 0; i < tds.length; i++) {
-        if (tds[i].textContent.toLowerCase() === text) {
-            tds[i].style.backgroundColor = "rgb(221, 167, 17)";
+        if (tds[i].textContent.toLowerCase().includes(text)) {
+            tds[i].classList.add("highlight");
         } else {
-            console.log("Could not find book!");
+            console.log("book not found")
         }
     }
     sortInput.value = "";
@@ -204,17 +204,9 @@ getRemoveBtn.addEventListener("click", (e) => {
 
 // SEARCH BOOKS
 sortBtn.addEventListener("click", () => {
-    let e = document.querySelector("#sort-by");
-    console.log(typeof e);
-    console.log(typeof e.selectedOptions[0].text);
-
-    if (e.selectedOptions[0].text === "title") {
-        searchBooks(sortInput.value.toLowerCase());
-    } else if (e.selectedOptions[0].text === "author") {
-        searchBooks(sortInput.value.toLowerCase());
-    } else {
-        searchBooks(sortInput.value.toLowerCase());
-    }
+    selectBooks.textContent = "";
+    selectBooks.appendChild(tableMaker());
+    searchBooks(sortInput.value.toLowerCase());
 });
 
 // ERASE LIBRARY BTN
@@ -245,4 +237,5 @@ noBtn.addEventListener("click", toggleModal);
 
 /*
 3. filter books options, currently highlights all no matter what select option is
+4. add ability to sort table, type in letter and it highlights according to that text
  */

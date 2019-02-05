@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>bookStash: A book tracking application.</title>
         <link rel="stylesheet" type="text/css" href="assets/styles/index.css">
-        <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Slabo+27px" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Raleway" rel="stylesheet">
     </head>
 
     <body>
@@ -41,14 +41,9 @@
         </div>
 
         <div id="organize" class="container">
-            <input id="book-sort" type="text" id="sort" name="sort" placeholder="Search">
+            <label for="book-sort">Search for books:</label>
+            <input id="book-sort" type="text" name="sort" placeholder="Search">
             <button id="sort-btn" class="btn">Search</button>
-            <label for="sort-by">Search books by:</label>
-            <select name="sort-by" id="sort-by">
-                <option value="title" selected="selected">Title</option>
-                <option value="author" selected="selected">Author</option>
-                <option value="year" selected="selected">Year</option>
-            </select>
         </div>
 
         <div id="library-title" class="container">
@@ -66,6 +61,13 @@
             <div class="modal--content">
                 <h3 class="modal--text">There's no going back after this! Are you sure you want to delete this library? </h3>
                 <button id="delete-yes" class="btn btn--choices">Yes, delete library.</button><button id="delete-no" class="btn btn--choices">No, I've changed my mind.</button>
+            </div>
+        </div>
+
+        <div class="modal">
+            <div class="modal--content">
+                <span class="modal--close">&times</span>
+                <h3>Could not locate book!</h3>
             </div>
         </div>
         
