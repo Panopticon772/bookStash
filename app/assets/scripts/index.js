@@ -115,7 +115,7 @@ const searchBooks = (text) => {
         if (tds[i].textContent.toLowerCase().includes(text)) {
             tds[i].classList.add("highlight");
         } else {
-            console.log("book not found")
+            console.log("book not found");
         }
     }
     sortInput.value = "";

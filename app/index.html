@@ -6,12 +6,13 @@
         <title>bookStash: A book tracking application.</title>
         <link rel="stylesheet" type="text/css" href="assets/styles/index.css">
         <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Raleway" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     </head>
 
     <body>
         <div id="heading" class="container">
-            <h1>bookStash</h1>
-            <h2>Keep track of your book collection!</h2>
+            <h1 class="app-title">bookStash</h1>
+            <h2 class="app-subtitle">Keep track of your book collection!</h2>
         </div>
 
         <div class="container">
@@ -64,12 +65,18 @@
             </div>
         </div>
 
-        <div class="modal">
-            <div class="modal--content">
-                <span class="modal--close">&times</span>
-                <h3>Could not locate book!</h3>
+        <footer>
+            <div class="info">
+                <div class="social">
+                    <p>&copy; 2019 Christopher Stepowski</p>
+                    <p>If you're a fan of <i class="fas fa-book-open"></i>, check out <a href="https://www.goodreads.com/" target="_blank">Goodreads!</a></p>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/christopher-stepowski-a3a87911b/" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://github.com/Panopticon772" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                </div>
             </div>
-        </div>
+        </footer>
         
         <script src="assets/scripts/index.js"></script>
     </body>
