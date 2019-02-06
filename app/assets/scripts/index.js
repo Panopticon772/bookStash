@@ -162,9 +162,14 @@ selectBooks.appendChild(tableMaker());
 
 // LIBRARY NAME BTN
 libNameBtn.addEventListener("click", () => {
-    localStorage.setItem("name", capitalizeFirst(getLibName.value));
-    libTitle.textContent = `${localStorage.getItem("name")}'s library`;
-    getLibName.value = "";
+    if (getLibName.value === "") {
+        alert("Please enter a valid name!");
+    } else {
+        localStorage.setItem("name", capitalizeFirst(getLibName.value));
+        libTitle.textContent = `${localStorage.getItem("name")}'s library`;
+        getLibName.value = "";
+    }
+    
 });
 
 // ADD BOOK BTN
@@ -239,3 +244,7 @@ noBtn.addEventListener("click", toggleModal);
 3. filter books options, currently highlights all no matter what select option is
 4. add ability to sort table, type in letter and it highlights according to that text
  */
+
+const str = "buzzington";
+const rev = str.split("").reverse().join("");
+console.log(rev);

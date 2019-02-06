@@ -15,38 +15,42 @@
             <h1 class="app-title white-text-shadow">bookStash <i class="fas fa-book-open"></i></h1>
             <h2 class="app-subtitle white-text-shadow">Keep track of your book collection!</h2>
         </div>
-        <!-- NAME INPUT -->
-        <div class="name container container--sub">
-            <label for="user">Enter your first name:</label>
-            <input id="library-name" type="text" name="user">
-            <button id="add-library-name" class="btn">Create library</button>
-        </div>
-        <!-- BOOK INFO -->
-        <div id="book-info" class="container container--sub">
-            <label for="title">Book Title:</label>
-            <input id="book-title" type="text" name="title">
 
-            <label for="author">Book Author:</label>
-            <input id="book-author" type="text" name="author">
-
-            <label for="year">Book Year:</label>
-            <input id="book-year" type="number" name="year" min="1">
-
-            <button id="add-book" class="btn">Add book</button>
+        <div class="form">
+            <!-- NAME INPUT -->
+            <div class="name container container--sub">
+                <label for="user">Enter your first name:</label>
+                <input id="library-name" type="text" name="user">
+                <button id="add-library-name" class="btn btn--book">Create library</button>
+            </div>
+            <!-- BOOK INFO -->
+            <div id="book-info" class="container container--sub">
+                <label for="title">Book Title:</label>
+                <input id="book-title" type="text" name="title">
+    
+                <label for="author">Book Author:</label>
+                <input id="book-author" type="text" name="author">
+    
+                <label for="year">Book Year:</label>
+                <input id="book-year" type="number" name="year" min="1">
+    
+                <button id="add-book" class="btn btn--book">Add book</button>
+            </div>
+            
+            <!-- REMOVE BOOK -->
+            <div class="container container--sub">
+                <label for="remove-id">Enter title of book to remove:</label>
+                <input  id="remove-id" type="text" name="remove-id">
+                <button id="remove-book" class="btn btn--book">Remove book</button>
+            </div>
+            <!-- SEARCH BOOKS -->
+            <div id="organize" class="container container--sub">
+                <label for="book-sort">Search for books:</label>
+                <input id="book-sort" type="text" name="sort" placeholder="Search">
+                <button id="sort-btn" class="btn btn--book">Search</button>
+            </div>
         </div>
         
-        <!-- REMOVE BOOK -->
-        <div class="container container--sub">
-            <label for="remove-id">Enter title of book to remove:</label>
-            <input  id="remove-id" type="text" name="remove-id">
-            <button id="remove-book" class="btn">Remove book</button>
-        </div>
-        <!-- SEARCH BOOKS -->
-        <div id="organize" class="container container--sub">
-            <label for="book-sort">Search for books:</label>
-            <input id="book-sort" type="text" name="sort" placeholder="Search">
-            <button id="sort-btn" class="btn">Search</button>
-        </div>
         <!-- LIBRARY NAME -->
         <div id="library-title" class="container">
             <h1 id="title-lib-name" class="white-text-shadow"></h1>
