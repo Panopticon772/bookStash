@@ -10,18 +10,19 @@
     </head>
 
     <body>
+        <!-- HEADER -->
         <div id="heading" class="container">
-            <h1 class="app-title">bookStash</h1>
-            <h2 class="app-subtitle">Keep track of your book collection!</h2>
+            <h1 class="app-title white-text-shadow">bookStash <i class="fas fa-book-open"></i></h1>
+            <h2 class="app-subtitle white-text-shadow">Keep track of your book collection!</h2>
         </div>
-
-        <div class="container">
+        <!-- NAME INPUT -->
+        <div class="name container container--sub">
             <label for="user">Enter your first name:</label>
             <input id="library-name" type="text" name="user">
             <button id="add-library-name" class="btn">Create library</button>
         </div>
-
-        <div id="book-info" class="container">
+        <!-- BOOK INFO -->
+        <div id="book-info" class="container container--sub">
             <label for="title">Book Title:</label>
             <input id="book-title" type="text" name="title">
 
@@ -34,42 +35,42 @@
             <button id="add-book" class="btn">Add book</button>
         </div>
         
-
-        <div class="container">
+        <!-- REMOVE BOOK -->
+        <div class="container container--sub">
             <label for="remove-id">Enter title of book to remove:</label>
             <input  id="remove-id" type="text" name="remove-id">
             <button id="remove-book" class="btn">Remove book</button>
         </div>
-
-        <div id="organize" class="container">
+        <!-- SEARCH BOOKS -->
+        <div id="organize" class="container container--sub">
             <label for="book-sort">Search for books:</label>
             <input id="book-sort" type="text" name="sort" placeholder="Search">
             <button id="sort-btn" class="btn">Search</button>
         </div>
-
+        <!-- LIBRARY NAME -->
         <div id="library-title" class="container">
-            <h1 id="title-lib-name"></h1>
+            <h1 id="title-lib-name" class="white-text-shadow"></h1>
         </div>
-
+        <!-- TABLE OF BOOKS -->
         <div id="book-library" class="container">
             <div id="books">
             </div>
         </div>
-
+        <!-- ERASE BOOKS -->
         <div class="container"><button id="erase-btn" class="btn">Erase library</button></div>
-
+        <!-- MODAL -->
         <div class="modal">
             <div class="modal--content">
                 <h3 class="modal--text">There's no going back after this! Are you sure you want to delete this library? </h3>
                 <button id="delete-yes" class="btn btn--choices">Yes, delete library.</button><button id="delete-no" class="btn btn--choices">No, I've changed my mind.</button>
             </div>
         </div>
-
+        <!-- FOOTER -->
         <footer>
             <div class="info">
                 <div class="social">
                     <p>&copy; 2019 Christopher Stepowski</p>
-                    <p>If you're a fan of <i class="fas fa-book-open"></i>, check out <a href="https://www.goodreads.com/" target="_blank">Goodreads!</a></p>
+                    <p>If you're a fan of reading, check out <a href="https://www.goodreads.com/" target="_blank">Goodreads!</a></p>
                 </div>
                 <div class="social-icons">
                     <a href="https://www.linkedin.com/in/christopher-stepowski-a3a87911b/" target="_blank"><i class="fab fa-github"></i></a>

@@ -17,15 +17,21 @@ body {
     margin-bottom: 1.0rem;
 }
 
+.container--sub {
+    margin: 1.0rem;
+    background-color: rgb(157, 84, 89);
+    color: #000;
+    border-radius: 5px;
+}
+
 #heading {
     font-family: "Merriweather", serif;
     background-color: rgb(50, 55, 77);
     padding: 0.5rem;
-    text-align: center;
     border-bottom: 1px solid #000;
 }
 
-.app-title {
+.white-text-shadow {
     color: #fff;
     text-shadow:
         3px 3px 0 #000,
@@ -33,16 +39,17 @@ body {
         1px -1px 0 #000,
         -1px 1px 0 #000,
         1px 1px 0 #000;
+    text-align: center;
 }
 
-.app-subtitle {
-    color: #fff;
-    text-shadow:
-        3px 3px 0 #000,
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
+#book-info {
+    display: flex;
+    flex-direction: column;
+    padding: 1.0rem;
+}
+
+#add-book {
+    margin: 1.0rem 0 0 0;
 }
 
 .highlight {
@@ -79,6 +86,7 @@ table, th, td {
 #erase-btn {
     border: 1px solid #fff;
     background-color: rgb(170, 8, 8);
+    margin-left: 1.0rem;
 }
 
 #erase-btn:hover {
@@ -131,11 +139,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 0.5rem;
+    border-top: 1px solid #000;
 }
 
 .info {
@@ -145,6 +149,7 @@ footer {
 .social {
     text-align: center;
     margin: 0.5rem;
+    font-size: 1.2rem;
 }
 
 .social a {
@@ -159,4 +164,12 @@ footer {
     padding-right: 0.5rem;
     font-size: 1.5rem;
     color: #fff;
+}
+
+@media screen and (min-width: 1200px) {
+    footer {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
 }
