@@ -44,8 +44,6 @@ const modal = document.querySelector(".modal");
 const yesBtn = document.querySelector("#delete-yes");
 const noBtn = document.querySelector("#delete-no");
 
-// SEARCH MODAL
-
 // set books equal to local storage if it already exists, if not, set to empty array
 let booksArray = localStorage.getItem("books") ? JSON.parse(localStorage.getItem("books")) : [];
 
@@ -114,6 +112,7 @@ const searchBooks = (text) => {
     for (let i = 0; i < tds.length; i++) {
         if (tds[i].textContent.toLowerCase().includes(text)) {
             tds[i].classList.add("highlight");
+            firstRow.style.backgroundColor = "blue";
         } else {
             console.log("book not found");
         }
@@ -153,6 +152,19 @@ const toggleModal = () => {
 const windowOnClick = (e) => {
     if (e.target === modal) {
         toggleModal();
+    }
+}
+
+const blueWindow = () => {
+    // GET FIRST TABLE ROW
+    const firstRow = document.getElementsByTagName("tr")[0];
+    // SELECT ALL TD
+    const td = firstRow.querySelectorAll("td");
+    // LOOP OVER TD AND APPLY BACKGROUND COLOR
+    for (let i = 0; i < td.length; i++) {
+        td[0].style.backgroundColor = "red";
+        td[1].style.backgroundColor = "green";
+        td[2].style.backgroundColor = "blue";
     }
 }
 
@@ -237,6 +249,7 @@ yesBtn.addEventListener("click", (e) => {
 });
 
 noBtn.addEventListener("click", toggleModal);
+blueWindow()
 
 // errors
 
@@ -244,7 +257,3 @@ noBtn.addEventListener("click", toggleModal);
 3. filter books options, currently highlights all no matter what select option is
 4. add ability to sort table, type in letter and it highlights according to that text
  */
-
-const str = "buzzington";
-const rev = str.split("").reverse().join("");
-console.log(rev);
