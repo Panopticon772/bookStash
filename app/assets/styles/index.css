@@ -78,10 +78,6 @@ input {
     color: rgb(44, 44, 44);
 }
 
-.cross-out {
-    text-decoration: line-through;
-}
-
 #books {
     font-family: "Raleway", sans-serif;
     margin: 1.0rem;
@@ -89,6 +85,9 @@ input {
 
 #library-title {
     border-top: 3px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #title-lib-name {
@@ -97,9 +96,9 @@ input {
     font-family: "Merriweather", serif;
     text-shadow: 2px 2px 3px #000;
     margin: 3.0rem 1.0rem;
-    background-color: rgb(157, 84, 89);
     border-radius: 5px;
     padding: 1.0rem;
+    border: 1px solid #fff;
 }
 
 table, th, td {

@@ -112,7 +112,6 @@ const searchBooks = (text) => {
     for (let i = 0; i < tds.length; i++) {
         if (tds[i].textContent.toLowerCase().includes(text)) {
             tds[i].classList.add("highlight");
-            firstRow.style.backgroundColor = "blue";
         } else {
             console.log("book not found");
         }
@@ -155,22 +154,37 @@ const windowOnClick = (e) => {
     }
 }
 
-const blueWindow = () => {
-    // GET FIRST TABLE ROW
-    const firstRow = document.getElementsByTagName("tr")[0];
-    // SELECT ALL TD
-    const td = firstRow.querySelectorAll("td");
-    // LOOP OVER TD AND APPLY BACKGROUND COLOR
-    for (let i = 0; i < td.length; i++) {
-        td[0].style.backgroundColor = "red";
-        td[1].style.backgroundColor = "green";
-        td[2].style.backgroundColor = "blue";
+const colorRow = () => {
+    if (selectBooks.textContent === "") {
+        // returns undefined
+        return;
+    } else {
+        // GET FIRST TABLE ROW
+        const firstRow = document.getElementsByTagName("tr")[0];
+        // SELECT ALL TD
+        const td = firstRow.querySelectorAll("td");
+        // LOOP OVER TD AND APPLY BACKGROUND COLOR
+        for (let i = 0; i < td.length; i++) {
+            td[i].style.backgroundColor = "rgb(157, 84, 89)";
+        }
+    }
+    
+}
+
+const titleBgColor = () => {
+    if (libTitle.textContent === "") {
+        libTitle.style.background = "none";
+    } else {
+        libTitle.style.background = "rgb(50, 55, 77)";
     }
 }
 
-displayLibName();
-
-selectBooks.appendChild(tableMaker());
+if (localStorage.length > 1) {
+    selectBooks.appendChild(tableMaker());
+    colorRow();
+} else {
+    console.log("Add a library name and some books to get started!");
+}
 
 // LIBRARY NAME BTN
 libNameBtn.addEventListener("click", () => {
@@ -179,6 +193,7 @@ libNameBtn.addEventListener("click", () => {
     } else {
         localStorage.setItem("name", capitalizeFirst(getLibName.value));
         libTitle.textContent = `${localStorage.getItem("name")}'s library`;
+        titleBgColor();
         getLibName.value = "";
     }
     
@@ -203,6 +218,8 @@ getAddBtn.addEventListener("click", () => {
         selectBooks.textContent = "";
         // append new table
         selectBooks.appendChild(tableMaker());
+        // add top row coloring
+        colorRow();
         // reset inputs
         resetData();
     }
@@ -245,15 +262,18 @@ yesBtn.addEventListener("click", (e) => {
     clearData();
     // set library title name and book table to empty string
     libTitle.textContent = "";
+    titleBgColor();
     selectBooks.textContent = "";
 });
 
 noBtn.addEventListener("click", toggleModal);
-blueWindow()
+
+displayLibName();
+
+titleBgColor();
 
 // errors
 
 /*
-3. filter books options, currently highlights all no matter what select option is
-4. add ability to sort table, type in letter and it highlights according to that text
+1. fix colorRow, titleColor
  */
