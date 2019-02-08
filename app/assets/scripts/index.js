@@ -68,41 +68,45 @@ const tableMaker = () => {
     const table = document.createElement("table");
     // give table id of book-table
     table.id = "book-table";
-    // set keys equal to ["title", "author", "year"]
-    const keys = Object.keys(booksArray[0]);
-    // create 1 row for table
-    let newRow = table.insertRow(-1);
+    if (booksArray.length === 0) {
+        return;
+    } else {
+        // set keys equal to ["title", "author", "year"]
+        const keys = Object.keys(booksArray[0]);
+        // create 1 row for table
+        let newRow = table.insertRow(-1);
 
-    // iterate over each element in keys (title, author, year)
-    keys.forEach((ele) => {
-        // insert a cell for every element
-        let newCell = newRow.insertCell(-1);
-        // set cell text equal to value of element
-        let newText = document.createTextNode(ele.toUpperCase());
-        newCell.appendChild(newText);
-    });
+        // iterate over each element in keys (title, author, year)
+        keys.forEach((ele) => {
+            // insert a cell for every element
+            let newCell = newRow.insertCell(-1);
+            // set cell text equal to value of element
+            let newText = document.createTextNode(ele.toUpperCase());
+            newCell.appendChild(newText);
+        });
 
-    booksArray.forEach((book) => {
-        // create row for each obj
-        let bookRow = table.insertRow(-1);
-        // insert cells in row
-        let titleCell = bookRow.insertCell(-1);
-        let authorCell = bookRow.insertCell(-1);
-        let yearCell = bookRow.insertCell(-1);
-        // insert text into cells
-        let titleText = document.createTextNode(capitalizeEveryFirstLetter(book.title));
-        let authorText = document.createTextNode(capitalizeEveryFirstLetter(book.author));
-        let yearText = document.createTextNode(capitalizeEveryFirstLetter(book.year));
-        // put text into cells
-        titleCell.appendChild(titleText);
-        authorCell.appendChild(authorText);
-        yearCell.appendChild(yearText);
-        // append new row to table
-        table.appendChild(bookRow);
-    });
+        booksArray.forEach((book) => {
+            // create row for each obj
+            let bookRow = table.insertRow(-1);
+            // insert cells in row
+            let titleCell = bookRow.insertCell(-1);
+            let authorCell = bookRow.insertCell(-1);
+            let yearCell = bookRow.insertCell(-1);
+            // insert text into cells
+            let titleText = document.createTextNode(capitalizeEveryFirstLetter(book.title));
+            let authorText = document.createTextNode(capitalizeEveryFirstLetter(book.author));
+            let yearText = document.createTextNode(capitalizeEveryFirstLetter(book.year));
+            // put text into cells
+            titleCell.appendChild(titleText);
+            authorCell.appendChild(authorText);
+            yearCell.appendChild(yearText);
+            // append new row to table
+            table.appendChild(bookRow);
+        });
 
-    // return table to function
-    return table;
+        // return table to function
+        return table;
+    }
 }
 
 // search books based on matching criteria
@@ -174,12 +178,14 @@ const colorRow = () => {
 const titleBgColor = () => {
     if (libTitle.textContent === "") {
         libTitle.style.background = "none";
+        libTitle.style.border = "none";
     } else {
         libTitle.style.background = "rgb(50, 55, 77)";
+        libTitle.style.border = "1px solid #fff";
     }
 }
 
-if (localStorage.length > 1) {
+if (booksArray.length > 0) {
     selectBooks.appendChild(tableMaker());
     colorRow();
 } else {
@@ -188,11 +194,14 @@ if (localStorage.length > 1) {
 
 // LIBRARY NAME BTN
 libNameBtn.addEventListener("click", () => {
+    // if value is equal to empty string, alert that user must enter data
     if (getLibName.value === "") {
         alert("Please enter a valid name!");
+        // otherwise, set lib name in local storage, then display on screen
     } else {
         localStorage.setItem("name", capitalizeFirst(getLibName.value));
         libTitle.textContent = `${localStorage.getItem("name")}'s library`;
+        // apply background color to title
         titleBgColor();
         getLibName.value = "";
     }
@@ -231,8 +240,10 @@ getRemoveBtn.addEventListener("click", (e) => {
     removeBook(removeId.value.toLowerCase());
     // clear existing table
     selectBooks.textContent = "";
-    // append new table
-    selectBooks.appendChild(tableMaker());
+    // append new table only if booksArray has items in it
+    if (booksArray.length > 0) {
+        selectBooks.appendChild(tableMaker());
+    }
     removeId.value = "";
 });
 
