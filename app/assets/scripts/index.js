@@ -75,15 +75,27 @@ const tableMaker = () => {
         const keys = Object.keys(booksArray[0]);
         // create 1 row for table
         let newRow = table.insertRow(-1);
+        // create table header
+        let thead = document.createElement("thead");
 
         // iterate over each element in keys (title, author, year)
+        keys.forEach((ele) => {
+            // create th for every ele
+            let th = document.createElement("th");
+            // set th text content to ele values
+            th.textContent = ele.toUpperCase();
+            // append th to row
+            newRow.appendChild(th);
+        });
+
+        /* // iterate over each element in keys (title, author, year)
         keys.forEach((ele) => {
             // insert a cell for every element
             let newCell = newRow.insertCell(-1);
             // set cell text equal to value of element
             let newText = document.createTextNode(ele.toUpperCase());
             newCell.appendChild(newText);
-        });
+        }); */
 
         booksArray.forEach((book) => {
             // create row for each obj
@@ -103,7 +115,6 @@ const tableMaker = () => {
             // append new row to table
             table.appendChild(bookRow);
         });
-
         // return table to function
         return table;
     }
@@ -165,11 +176,12 @@ const colorRow = () => {
     } else {
         // GET FIRST TABLE ROW
         const firstRow = document.getElementsByTagName("tr")[0];
-        // SELECT ALL TD
-        const td = firstRow.querySelectorAll("td");
+        // SELECT ALL Th
+        const th = firstRow.querySelectorAll("th");
         // LOOP OVER TD AND APPLY BACKGROUND COLOR
-        for (let i = 0; i < td.length; i++) {
-            td[i].style.backgroundColor = "rgb(157, 84, 89)";
+        for (let i = 0; i < th.length; i++) {
+            th[i].style.backgroundColor = "rgb(157, 84, 89)";
+            th[i].style.textShadow = "1px 1px 1px #000";
         }
     }
     
@@ -244,6 +256,7 @@ getRemoveBtn.addEventListener("click", (e) => {
     if (booksArray.length > 0) {
         selectBooks.appendChild(tableMaker());
     }
+    colorRow();
     removeId.value = "";
 });
 
@@ -252,6 +265,7 @@ sortBtn.addEventListener("click", () => {
     selectBooks.textContent = "";
     selectBooks.appendChild(tableMaker());
     searchBooks(sortInput.value.toLowerCase());
+    colorRow();
 });
 
 // ERASE LIBRARY BTN
@@ -286,5 +300,5 @@ titleBgColor();
 // errors
 
 /*
-1. fix colorRow, titleColor
+1. add alternating color rows to table
  */
