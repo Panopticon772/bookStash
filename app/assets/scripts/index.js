@@ -304,10 +304,3 @@ hideLibrary();
 displayLibName();
 
 titleBgColor();
-
-// errors
-
-/*
-1. add alternating color rows to table
-2. remove erase btn when no lib present
- */

@@ -31,10 +31,12 @@ const sortInput = document.querySelector("#book-sort");
 const sortBtn = document.querySelector("#sort-btn");
 
 // LIBRARY NAME DISPLAY
+const libInfo = document.querySelector(".library-info");
 const libTitleDiv = document.querySelector("#library-title");
 const libTitle = document.querySelector("#title-lib-name");
 
 // ERASE LIBRARY
+const eraseDiv = document.querySelector("erase-div");
 const eraseBooksBtn = document.querySelector("#erase-btn");
 
 // MODAL
@@ -88,15 +90,6 @@ const tableMaker = () => {
             newRow.appendChild(th);
         });
 
-        /* // iterate over each element in keys (title, author, year)
-        keys.forEach((ele) => {
-            // insert a cell for every element
-            let newCell = newRow.insertCell(-1);
-            // set cell text equal to value of element
-            let newText = document.createTextNode(ele.toUpperCase());
-            newCell.appendChild(newText);
-        }); */
-
         booksArray.forEach((book) => {
             // create row for each obj
             let bookRow = table.insertRow(-1);
@@ -115,6 +108,7 @@ const tableMaker = () => {
             // append new row to table
             table.appendChild(bookRow);
         });
+
         // return table to function
         return table;
     }
@@ -138,6 +132,14 @@ const capitalizeFirst = (str) => str.charAt(0).toUpperCase() + str.substring(1);
 
 const clearData = () => {
     localStorage.clear();
+}
+
+const hideLibrary = () => {
+    if (localStorage.length < 1) {
+        libInfo.style.display = "none";
+    } else {
+        libInfo.style.display = "block";
+    }
 }
 
 // reset inputs
@@ -216,6 +218,7 @@ libNameBtn.addEventListener("click", () => {
         // apply background color to title
         titleBgColor();
         getLibName.value = "";
+        hideLibrary();
     }
     
 });
@@ -241,6 +244,8 @@ getAddBtn.addEventListener("click", () => {
         selectBooks.appendChild(tableMaker());
         // add top row coloring
         colorRow();
+        // display div
+        hideLibrary();
         // reset inputs
         resetData();
     }
@@ -289,16 +294,13 @@ yesBtn.addEventListener("click", (e) => {
     libTitle.textContent = "";
     titleBgColor();
     selectBooks.textContent = "";
+    hideLibrary();
 });
 
 noBtn.addEventListener("click", toggleModal);
 
+hideLibrary();
+
 displayLibName();
 
 titleBgColor();
-
-// errors
-
-/*
-1. add alternating color rows to table
- */
