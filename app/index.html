@@ -11,20 +11,20 @@
 
     <body>
         <!-- HEADER -->
-        <div id="heading" class="container">
+        <div id="heading">
             <h1 class="app-title white-text-shadow">bookStash <i class="fas fa-book-open"></i></h1>
             <h2 class="app-subtitle white-text-shadow">Keep track of your book collection!</h2>
         </div>
 
         <div class="form">
             <!-- NAME INPUT -->
-            <div class="name container container--sub">
+            <div class="name container--sub space-top">
                 <label for="user">Enter your first name:</label>
                 <input id="library-name" type="text" name="user">
                 <button id="add-library-name" class="btn btn--book">Create library</button>
             </div>
             <!-- BOOK INFO -->
-            <div id="book-info" class="container container--sub">
+            <div id="book-info" class="container--sub">
                 <label for="title">Book Title:</label>
                 <input id="book-title" type="text" name="title">
     
@@ -38,44 +38,40 @@
             </div>
             
             <!-- REMOVE BOOK -->
-            <div class="container container--sub">
+            <div class="container--sub">
                 <label for="remove-id">Enter title of book to remove:</label>
                 <input  id="remove-id" type="text" name="remove-id">
                 <button id="remove-book" class="btn btn--book">Remove book</button>
             </div>
             <!-- SEARCH BOOKS -->
-            <div id="organize" class="container container--sub">
+            <div id="organize" class="container--sub space-bot">
                 <label for="book-sort">Search for books:</label>
                 <input id="book-sort" type="text" name="sort" placeholder="Search">
                 <button id="sort-btn" class="btn btn--book">Search</button>
             </div>
         </div>
         <!-- END OF FORM DIV -->
-
-        <!-- CREATES SPACE -->
-        <div class="large-space"></div>
         
-        <!-- LIBRARY NAME -->
-        <div id="library-title" class="container">
-            <h1 id="title-lib-name" class="white-text-shadow"></h1>
-        </div>
-        <!-- TABLE OF BOOKS -->
-        <div id="book-library" class="container">
-            <div id="books">
+        <div class="library-info">
+            <!-- LIBRARY NAME -->
+            <div id="library-title">
+                <h1 id="title-lib-name" class="white-text-shadow"></h1>
+            </div>
+            <!-- TABLE OF BOOKS -->
+            <div id="book-library" class="book-container">
+                <div id="books">
+                </div>
+            </div>
+            <!-- ERASE BOOKS -->
+            <div><button id="erase-btn" class="btn">Erase library</button></div>
+            <!-- MODAL -->
+            <div class="modal">
+                <div class="modal--content">
+                    <h3 class="modal--text">There's no going back after this! Are you sure you want to delete this library? </h3>
+                    <button id="delete-yes" class="btn btn--choices">Yes, delete library.</button><button id="delete-no" class="btn btn--choices">No, I've changed my mind.</button>
+                </div>
             </div>
         </div>
-        <!-- ERASE BOOKS -->
-        <div class="container"><button id="erase-btn" class="btn">Erase library</button></div>
-        <!-- MODAL -->
-        <div class="modal">
-            <div class="modal--content">
-                <h3 class="modal--text">There's no going back after this! Are you sure you want to delete this library? </h3>
-                <button id="delete-yes" class="btn btn--choices">Yes, delete library.</button><button id="delete-no" class="btn btn--choices">No, I've changed my mind.</button>
-            </div>
-        </div>
-
-        <!-- CREATES SPACE -->
-        <div class="large-space"></div>
         
         <!-- FOOTER -->
         <footer>
